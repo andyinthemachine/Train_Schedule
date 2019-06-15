@@ -24,10 +24,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 
   <style>
-     #employee-table th, td {
-       display: inline-block; 
-       width: 16.575%;
-     } 
+    .navbar {
+      margin-bottom: 30px;
+    }
+
+    /* #employee-table th, td { 
+         display: inline-block;  
+         width: 16.575%; */
   </style>
 </head>
 
@@ -36,9 +39,8 @@
   <div class="container">
 
     <!-- Jumbotron -->
-    <div class="jumbotron" style="background-color: rgb(42, 43, 97); color: white">
-      <h1 class="text-center">Train Schedule</h1>
-      <h3 class="text-center"></h3>
+    <div class="navbar" style="background-color: rgb(42, 43, 97); color: white">
+      <h2 class="text-center">Train Schedule</h2>
     </div>
 
     <div class="row">
@@ -48,15 +50,14 @@
         <div class="card mb-4">
           <div class="card-header">New Lines</div>
           <div class="card-body">
-            <table class="table table-sm table-hover" id='employee-table'>
+            <table class="table table-sm table-hover" id='train-table'>
               <thead>
                 <tr>
                   <th scope="col">Name</th>
                   <th scope="col">Destination</th>
-                  <th scope="col">Start Date</th>
-                  <th scope="col">Months Worked</th>
-                  <th scope="col">Monthly Rate ($)</th>
-                  <th scope="col">Total Billed ($)</th>
+                  <th scope="col">Frequency (min)</th>
+                  <th scope="col">Next Arrival</th>
+                  <th scope="col">Minutes Away</th>
                 </tr>
               </thead>
               <tbody>
@@ -66,32 +67,34 @@
         </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-12">
-        <!-- Add Employee  -->
+        <!-- Add Line  -->
         <div class="card mb-4">
-          <div class="card-header">Add Employee</div>
+          <div class="card-header">Add New Line</div>
           <div class="card-body">
 
             <!-- Entry Form -->
             <form>
               <div class="form-group">
-                <label for="employee-name-input">Employee Name</label>
-                <input class="form-control" id="employee-name-input" placeholder="Jane Doe" type="text">
+                <label for="line-name-input">Train Name</label>
+                <input class="form-control" id="line-name-input" type="text">
               </div>
               <div class="form-group">
-                <label for="role-input">Role</label>
-                <input class="form-control" id="role-input" placeholder="CEO" type="text">
+                <label for="destination-input">Destination</label>
+                <input class="form-control" id="destination-input" type="text">
               </div>
               <div class="form-group">
-                <label for="start-input">Start Date (MM/DD/YYYY)</label>
-                <input class="form-control" id="start-input" placeholder="01/08/1989" type="text">
+                <label for="first-run-input">First Run (Military Time)</label>
+                <input class="form-control" id="first-run-input" type="number">
               </div>
               <div class="form-group">
-                <label for="rate-input">Monthly Rate</label>
-                <input class="form-control" id="rate-input" placeholder="200000" type="text">
+                <label for="frequency-input">Frequency (min)</label>
+                <input class="form-control" id="frequency-input" type="number">
               </div>
-              <button class="btn btn-primary"style="background-color: rgb(42, 43, 97); color: white" id="add-employee-btn">Submit</button>
+              <button class="btn btn-primary" style="background-color: rgb(42, 43, 97); color: white"
+                id="add-line-btn">Submit</button>
             </form>
 
           </div>
