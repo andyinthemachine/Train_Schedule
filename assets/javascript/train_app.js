@@ -17,10 +17,6 @@ firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
 
-var name = "";
-var destination = "";
-var first_run = "";
-var frequency = "";
 
 $("#add-line-btn").on("click", function (event) {
     event.preventDefault();
@@ -28,7 +24,7 @@ $("#add-line-btn").on("click", function (event) {
     console.log("submit");
 
     name = $("#line-name-input").val().trim();
-    desintation = $("#destination-input").val().trim();
+    destination = $("#destination-input").val().trim();
     first_run = $("#first-run-input").val().trim();
     frequency = $("#frequency-input").val().trim();
 
@@ -40,4 +36,39 @@ $("#add-line-btn").on("click", function (event) {
         // dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
 
+    $(".form-control").val("");
+
 });
+
+database.ref().on("child_added", function (snapshot) {
+
+    var name = snapshot.val().name;
+    var destination = snapshot.val().dest;
+    var first_run = snapshot.val().first;
+    var frequency = snapshot.val().freq;
+
+
+    // var empStartPretty = moment.unix(empStart).format("MM/DD/YYYY");
+
+    // Calculate the months worked using hardcore math
+    // To calculate the months worked
+    // var empMonths = moment().diff(moment(empStart, "X"), "months");
+
+    // Calculate the total billed rate
+    // var empBilled = empMonths * empRate;
+
+    var newRow = $("<tr>").append(
+        $("<td>").text(name),
+        $("<td>").text(destination),
+        $("<td>").text(frequency),
+        $("<td>").text("test"),
+        $("<td>").text("test"),
+    );
+    // Append the new row to the table
+    $("#train-table > tbody").append(newRow);
+
+}, function (errorObject) {
+    console.log("Errors handled: " + errorObject.code);
+});
+
+
