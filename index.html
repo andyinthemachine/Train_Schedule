@@ -27,11 +27,8 @@
     .navbar {
       margin-bottom: 30px;
     }
-
-    /* #employee-table th, td { 
-         display: inline-block;  
-         width: 16.575%; */
   </style>
+
 </head>
 
 <body>
@@ -40,7 +37,8 @@
 
     <!-- Jumbotron -->
     <div class="navbar" style="background-color: rgb(42, 43, 97); color: white">
-      <h2 class="text-center">Train Schedule</h2>
+      <h3 class="text-center">Train Schedule</h3>
+
     </div>
 
     <div class="row">
@@ -48,7 +46,7 @@
       <div class="col-md-12">
 
         <div class="card mb-4">
-          <div class="card-header">New Lines</div>
+          <div class="card-header">Train Lines</div>
           <div class="card-body">
             <table class="table table-sm table-hover" id='train-table'>
               <thead>
@@ -86,7 +84,7 @@
                 <input class="form-control" id="destination-input" type="text">
               </div>
               <div class="form-group">
-                <label for="first-run-input">First Run (Military Time)</label>
+                <label for="first-run-input">First Run (HH:mm Military Time)</label>
                 <input class="form-control" id="first-run-input" type="text">
               </div>
               <div class="form-group">

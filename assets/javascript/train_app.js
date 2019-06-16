@@ -16,55 +16,51 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
-
-
 $("#add-line-btn").on("click", function (event) {
     event.preventDefault();
-
-    console.log("submit");
 
     name = $("#line-name-input").val().trim();
     destination = $("#destination-input").val().trim();
     first_run = $("#first-run-input").val().trim();
     frequency = $("#frequency-input").val().trim();
 
-    database.ref().push({
+    var new_line = {
         name: name,
         dest: destination,
         first: first_run,
         freq: frequency
-        // dateAdded: firebase.database.ServerValue.TIMESTAMP
-    });
-
+    }
+    database.ref().push(new_line);
     $(".form-control").val("");
-
 });
+
 
 database.ref().on("child_added", function (snapshot) {
 
     var name = snapshot.val().name;
     var destination = snapshot.val().dest;
     var first_run = snapshot.val().first;
-    var frequency = snapshot.val().freq;
+    var frequency = parseInt(snapshot.val().freq);
 
+    var first_run_backed_up = moment(first_run, "HH:mm").subtract(1, "years");
+    var current_time = moment();
+    var elapsed = moment().diff(moment(first_run_backed_up), "minutes");
 
-    // var empStartPretty = moment.unix(empStart).format("MM/DD/YYYY");
+    remainder = current_time - first_run;
 
-    // Calculate the months worked using hardcore math
-    // To calculate the months worked
-    // var empMonths = moment().diff(moment(empStart, "X"), "months");
+    var remainder = elapsed % frequency;
 
-    // Calculate the total billed rate
-    // var empBilled = empMonths * empRate;
+    var minutes_away = frequency - remainder;
+
+    var next_train = moment().add(minutes_away, "minutes").format('LT');
 
     var newRow = $("<tr>").append(
         $("<td>").text(name),
         $("<td>").text(destination),
         $("<td>").text(frequency),
-        $("<td>").text("test"),
-        $("<td>").text("test"),
+        $("<td>").text(next_train),
+        $("<td>").text(minutes_away),
     );
-    // Append the new row to the table
     $("#train-table > tbody").append(newRow);
 
 }, function (errorObject) {
